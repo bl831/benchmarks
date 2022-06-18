@@ -1,0 +1,593 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+   <TITLE>X-ray Benchmarks</TITLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#C0C0C0" LINK="#0000EE" VLINK="#551A8B" ALINK="#FF0000">
+
+<H1 ALIGN=CENTER><FONT SIZE=+4>James Holton's Benchmarks...</FONT></H1>
+
+<H1 ALIGN=CENTER>
+<HR WIDTH="100%"></H1>
+
+<P><B><FONT COLOR="#004000"><FONT SIZE=+2>Comparison of x-ray programs
+on different machines</FONT></FONT></B></P>
+
+<P><FONT SIZE=+1>The following tables are a comparison of standard x-ray
+data-processing jobs run on various computers I&nbsp;have access to. The
+machine names have been omitted to protect the innocent. All these jobs
+were run as the only &quot;major&quot;&nbsp;process on the machine, and
+always from a local disk. The exact same data directory was tar-ed up and
+moved from machine to mahcine.</FONT></P>
+
+<H1>
+<HR WIDTH="100%"><FONT COLOR="#004000"><FONT SIZE=+2>Speed of DIALS</FONT></FONT></H1>
+
+<P><FONT SIZE=+1>The following are the results of processing a 3600-image data set of
+lysozyme from a Pilatus-sized detector in DIALS. By using simulated images, the download
+size of the test data is only 10 MB.  Everything is downloaded and decompressed automatically 
+using this script
+ <A HREF="http://smb.slac.stanford.edu/~holton/benchmarks/dials/dials_bench.com">dials_bench.com</A>.
+The timings of each step: import, findspots, index, refine, integrate, export are for all 3600 images.
+I strongly encourage anyone out there with a new machine running Linux or Mac OSX
+to give this a try. This list shows only the best result from each machine.  The full list of all 
+timings is available in <a href=dials/sorted.txt>this file</a>. I think all us
+crystallographers could really use a standard reference for the &quot;speed
+of DIALS&quot; since it seems to be very difficult (for me
+at least) to predict how any particular system is going to perform.</FONT></P>
+Please run this benchmark on your own Linux/Mac machine by doing this:</p>
+<pre>
+mkdir -p /dev/shm/dials_bench/
+cd /dev/shm/dials_bench/
+wget http://bl831.als.lbl.gov/~jamesh/benchmarks/dials/dials_bench.com
+chmod a+x ./dials_bench.com
+./dials_bench.com
+</pre>
+
+<TABLE BORDER=1>
+<TR ALIGN=CENTER VALIGN=CENTER>
+<TD>Total (s)</TD>
+<TD>speed</TD>
+<TD>import</TD>
+<TD>find spots</TD>
+<TD>index</TD>
+<TD>refine</TD>
+<TD>integrate</TD>
+<TD>export</TD>
+<TD>MHz</TD>
+<TD>disk data rate</TD>
+<TD>nproc =</TD>
+<TD>CPUs</TD>
+<TD>sockets</TD>
+<TD>cores / socket</TD>
+<TD>thds / core</TD>
+<TD>cache</TD>
+<TD>sys mem (GB)</TD>
+<TD>machine description</TD>
+</TR>
+<TR><TD>910.599</TD><TD>1.00</TD><TD>0.6</TD><TD>46.5</TD><TD>402.7</TD><TD>70.4</TD><TD>376.3</TD><TD>14.1</TD><TD>3100</TD><TD>8.3 MB/s</TD><TD>32</TD><TD>64</TD><TD>2</TD><TD>16</TD><TD>2</TD><TD>36864 KB</TD><TD>251</TD><TD>Intel(R) Xeon(R) Gold 6346 CPU @ 3.10GHz Linux hyperion</TD></TR>
+<TR><TD>910.599</TD><TD>1.00</TD><TD>0.6</TD><TD>54</TD><TD>295</TD><TD>598</TD><TD>171</TD><TD>11.5</TD><TD>3100</TD><TD>8.3 MB/s</TD><TD>32</TD><TD>64</TD><TD>2</TD><TD>16</TD><TD>2</TD><TD>36864 KB</TD><TD>251</TD><TD>Intel(R) Xeon(R) Gold 6346 CPU @ 3.10GHz Linux hyperion</TD></TR>
+<TR><TD>1387.74</TD><TD>0.66</TD><TD>0.7</TD><TD>37.1</TD><TD>330.9</TD><TD>91.8</TD><TD>906.2</TD><TD>21.1</TD><TD>2601</TD><TD>1.3 GB/s</TD><TD>100</TD><TD>448</TD><TD>8</TD><TD>28</TD><TD>2</TD><TD>39424 KB</TD><TD>3022</TD><TD>Intel(R) Xeon(R) Platinum 8280L CPU @ 2.60GHz Linux octamus1</TD></TR>
+<TR><TD>1559.94</TD><TD>0.58</TD><TD>0.5</TD><TD>123.1</TD><TD>266.9</TD><TD>85.9</TD><TD>1069.4</TD><TD>14.2</TD><TD>3301</TD><TD>2.5 GB/s</TD><TD>10</TD><TD>20</TD><TD>1</TD><TD>10</TD><TD>2</TD><TD>14080 KB</TD><TD>125</TD><TD>Intel(R) Xeon(R) W-2155 CPU @ 3.30GHz Linux graphics1</TD></TR>
+<TR><TD>1591.22</TD><TD>0.57</TD><TD>2.5</TD><TD>129.0</TD><TD>274.4</TD><TD>85.5</TD><TD>1085.3</TD><TD>14.5</TD><TD>3301</TD><TD>2.0 GB/s</TD><TD>10</TD><TD>20</TD><TD>1</TD><TD>10</TD><TD>2</TD><TD>14080 KB</TD><TD>125</TD><TD>Intel(R) Xeon(R) W-2155 CPU @ 3.30GHz Linux graphics1</TD></TR>
+<TR><TD>1631.47</TD><TD>0.56</TD><TD>0.4</TD><TD>135.9</TD><TD>633.8</TD><TD>149.4</TD><TD>693.3</TD><TD>18.7</TD><TD>3776</TD><TD>2.7 GB/s</TD><TD>12</TD><TD>12</TD><TD>1</TD><TD>6</TD><TD>2</TD><TD>15360 KB</TD><TD>125</TD><TD>Intel(R) Xeon(R) CPU E5-1650 v3 @ 3.50GHz Linux venus</TD></TR>
+<TR><TD>1768.34</TD><TD>0.51</TD><TD>0.6</TD><TD>139.3</TD><TD>765.4</TD><TD>183.7</TD><TD>656.9</TD><TD>22.4</TD><TD>2401</TD><TD>2.3 GB/s</TD><TD>24</TD><TD>24</TD><TD>2</TD><TD>6</TD><TD>2</TD><TD>15360 KB</TD><TD>62</TD><TD>Intel(R) Xeon(R) CPU E5-2620 v3 @ 2.40GHz Linux hille</TD></TR>
+<TR><TD>1811.21</TD><TD>0.50</TD><TD>1.0</TD><TD>88.6</TD><TD>383.8</TD><TD>744.1</TD><TD>579.1</TD><TD>14.7</TD><TD>2958</TD><TD>3.4 MB/s</TD><TD>36</TD><TD>72</TD><TD>2</TD><TD>18</TD><TD>2</TD><TD>25344 KB</TD><TD>188</TD><TD>Intel(R) Xeon(R) Gold 6140 CPU @ 2.30GHz Linux pxproc01</TD></TR>
+<TR><TD>1870.88</TD><TD>0.49</TD><TD>3.4</TD><TD>158.2</TD><TD>303.6</TD><TD>87.8</TD><TD>1297.8</TD><TD>20.0</TD><TD>3301</TD><TD>1.7 GB/s</TD><TD>10</TD><TD>20</TD><TD>1</TD><TD>10</TD><TD>2</TD><TD>14080 KB</TD><TD>125</TD><TD>Intel(R) Xeon(R) W-2155 CPU @ 3.30GHz Linux graphics2</TD></TR>
+<TR><TD>1883.15</TD><TD>0.48</TD><TD>1.9</TD><TD>119.8</TD><TD>985.9</TD><TD>184.8</TD><TD>563.4</TD><TD>27.4</TD><TD>1200</TD><TD>1.7 GB/s</TD><TD>23</TD><TD>48</TD><TD>2</TD><TD>12</TD><TD>2</TD><TD>30720 KB</TD><TD>125</TD><TD>Intel(R) Xeon(R) CPU E5-2670 v3 @ 2.30GHz Linux pxproc32</TD></TR>
+<TR><TD>1884.37</TD><TD>0.48</TD><TD>1.2</TD><TD>160.2</TD><TD>289.5</TD><TD>87.4</TD><TD>1326.4</TD><TD>19.7</TD><TD>3301</TD><TD>1.7 GB/s</TD><TD>10</TD><TD>20</TD><TD>1</TD><TD>10</TD><TD>2</TD><TD>14080 KB</TD><TD>125</TD><TD>Intel(R) Xeon(R) W-2155 CPU @ 3.30GHz Linux graphics2</TD></TR>
+<TR><TD>1915.16</TD><TD>0.48</TD><TD>1.4</TD><TD>99.3</TD><TD>943.6</TD><TD>194.9</TD><TD>654.2</TD><TD>21.8</TD><TD>2994</TD><TD>2.2 GB/s</TD><TD>16</TD><TD>16</TD><TD>2</TD><TD>8</TD><TD>1</TD><TD>20480 KB</TD><TD>125</TD><TD>Intel(R) Xeon(R) CPU E5-2620 v4 @ 2.10GHz Linux psanaphi109</TD></TR>
+<TR><TD>1926.24</TD><TD>0.47</TD><TD>0.7</TD><TD>143.4</TD><TD>331.8</TD><TD>91.2</TD><TD>1337.8</TD><TD>21.2</TD><TD>2601</TD><TD>717 MB/s</TD><TD>10</TD><TD>448</TD><TD>8</TD><TD>28</TD><TD>2</TD><TD>39424 KB</TD><TD>3022</TD><TD>Intel(R) Xeon(R) Platinum 8280L CPU @ 2.60GHz Linux octamus1</TD></TR>
+<TR><TD>1992.08</TD><TD>0.46</TD><TD>1.9</TD><TD>123.8</TD><TD>987.8</TD><TD>186.2</TD><TD>664.9</TD><TD>27.5</TD><TD>1200</TD><TD>1.6 GB/s</TD><TD>12</TD><TD>48</TD><TD>2</TD><TD>12</TD><TD>2</TD><TD>30720 KB</TD><TD>125</TD><TD>Intel(R) Xeon(R) CPU E5-2670 v3 @ 2.30GHz Linux pxproc32</TD></TR>
+<TR><TD>2044.06</TD><TD>0.45</TD><TD>0.6</TD><TD>166.6</TD><TD>784.8</TD><TD>174.5</TD><TD>895.0</TD><TD>22.5</TD><TD>3201</TD><TD>2.4 GB/s</TD><TD>16</TD><TD>16</TD><TD>1</TD><TD>8</TD><TD>2</TD><TD>20480 KB</TD><TD>62</TD><TD>Intel(R) Xeon(R) CPU E5-1660 v4 @ 3.20GHz Linux archive3</TD></TR>
+<TR><TD>2044.6</TD><TD>0.45</TD><TD>0.9</TD><TD>56.8</TD><TD>981.4</TD><TD>226.5</TD><TD>745.7</TD><TD>33.2</TD><TD>2500</TD><TD>1.6 GB/s</TD><TD>124</TD><TD>144</TD><TD>4</TD><TD>18</TD><TD>2</TD><TD>46080 KB</TD><TD>1007</TD><TD>Intel(R) Xeon(R) CPU E7-8870 v3 @ 2.10GHz Linux dataserver4</TD></TR>
+<TR><TD>2066.97</TD><TD>0.44</TD><TD>0.7</TD><TD>155.4</TD><TD>957.3</TD><TD>214.9</TD><TD>711.7</TD><TD>27.0</TD><TD>2301</TD><TD>1.9 GB/s</TD><TD>38</TD><TD>40</TD><TD>2</TD><TD>10</TD><TD>2</TD><TD>25600 KB</TD><TD>62</TD><TD>Intel(R) Xeon(R) CPU E5-2650 v3 @ 2.30GHz Linux dataserver3</TD></TR>
+<TR><TD>2197.4</TD><TD>0.41</TD><TD>1.4</TD><TD>155.1</TD><TD>953.0</TD><TD>195.6</TD><TD>870.3</TD><TD>21.9</TD><TD>2931</TD><TD>2.3 GB/s</TD><TD>8</TD><TD>16</TD><TD>2</TD><TD>8</TD><TD>1</TD><TD>20480 KB</TD><TD>125</TD><TD>Intel(R) Xeon(R) CPU E5-2620 v4 @ 2.10GHz Linux psanaphi109</TD></TR>
+<TR><TD>2208.78</TD><TD>0.41</TD><TD>0.4</TD><TD>137.8</TD><TD>1072.9</TD><TD>243.5</TD><TD>725.8</TD><TD>28.3</TD><TD>2399</TD><TD>2.0 GB/s</TD><TD>24</TD><TD>24</TD><TD>2</TD><TD>6</TD><TD>2</TD><TD>15360 KB</TD><TD>62</TD><TD>Intel(R) Xeon(R) CPU E5-2620 v3 @ 2.40GHz Linux xenopus</TD></TR>
+<TR><TD>2255.19</TD><TD>0.40</TD><TD>0.9</TD><TD>80.9</TD><TD>437.2</TD><TD>147.9</TD><TD>1561.4</TD><TD>27.0</TD><TD>2850</TD><TD>1.7 GB/s</TD><TD>24</TD><TD>48</TD><TD>2</TD><TD>12</TD><TD>2</TD><TD>30720 KB</TD><TD>251</TD><TD>Intel(R) Xeon(R) CPU E5-2650 v4 @ 2.20GHz Linux voltron</TD></TR>
+<TR><TD>2380.71</TD><TD>0.38</TD><TD>2.8</TD><TD>94.4</TD><TD>1161.3</TD><TD>239.6</TD><TD>849.3</TD><TD>33.3</TD><TD>2599</TD><TD>1.3 GB/s</TD><TD>20</TD><TD>40</TD><TD>2</TD><TD>10</TD><TD>2</TD><TD>25600 KB</TD><TD>125</TD><TD>Intel(R) Xeon(R) CPU E5-2650 v3 @ 2.30GHz Linux claros</TD></TR>
+<TR><TD>2432.43</TD><TD>0.37</TD><TD>0.9</TD><TD>139.8</TD><TD>980.6</TD><TD>223.8</TD><TD>1054.8</TD><TD>32.6</TD><TD>2597</TD><TD>1.7 GB/s</TD><TD>17</TD><TD>144</TD><TD>4</TD><TD>18</TD><TD>2</TD><TD>46080 KB</TD><TD>1007</TD><TD>Intel(R) Xeon(R) CPU E7-8870 v3 @ 2.10GHz Linux dataserver4</TD></TR>
+<TR><TD>2496.5</TD><TD>0.36</TD><TD>0.7</TD><TD>174.0</TD><TD>1004.2</TD><TD>218.0</TD><TD>1071.8</TD><TD>27.8</TD><TD>2301</TD><TD>2.1 GB/s</TD><TD>10</TD><TD>40</TD><TD>2</TD><TD>10</TD><TD>2</TD><TD>25600 KB</TD><TD>62</TD><TD>Intel(R) Xeon(R) CPU E5-2650 v3 @ 2.30GHz Linux dataserver3</TD></TR>
+<TR><TD>2507.88</TD><TD>0.36</TD><TD>0.6</TD><TD>171.4</TD><TD>776.2</TD><TD>174.7</TD><TD>1362.2</TD><TD>22.8</TD><TD>3201</TD><TD>2.6 GB/s</TD><TD>7</TD><TD>16</TD><TD>1</TD><TD>8</TD><TD>2</TD><TD>20480 KB</TD><TD>62</TD><TD>Intel(R) Xeon(R) CPU E5-1660 v4 @ 3.20GHz Linux archive3</TD></TR>
+<TR><TD>2566.39</TD><TD>0.35</TD><TD>0.8</TD><TD>194.6</TD><TD>642.9</TD><TD>190.9</TD><TD>1513.3</TD><TD>23.9</TD><TD>2101</TD><TD>1.6 GB/s</TD><TD>12</TD><TD>24</TD><TD>1</TD><TD>12</TD><TD>2</TD><TD>16896 KB</TD><TD>125</TD><TD>Intel(R) Xeon(R) Silver 4116 CPU @ 2.10GHz Linux bl831a</TD></TR>
+<TR><TD>2572.02</TD><TD>0.35</TD><TD>2.5</TD><TD>181.3</TD><TD>615.6</TD><TD>179.7</TD><TD>1566.8</TD><TD>26.1</TD><TD>2101</TD><TD>1.3 GB/s</TD><TD>12</TD><TD>24</TD><TD>1</TD><TD>12</TD><TD>2</TD><TD>16896 KB</TD><TD>125</TD><TD>Intel(R) Xeon(R) Silver 4116 CPU @ 2.10GHz Linux bl831a</TD></TR>
+<TR><TD>2606.11</TD><TD>0.35</TD><TD>0.6</TD><TD>210.7</TD><TD>1093.6</TD><TD>243.3</TD><TD>1031.6</TD><TD>26.3</TD><TD>1600</TD><TD>2.0 GB/s</TD><TD>21</TD><TD>24</TD><TD>2</TD><TD>6</TD><TD>2</TD><TD>12288 KB</TD><TD>47</TD><TD>Intel(R) Xeon(R) CPU X5690 @ 3.47GHz Linux touchscreen2</TD></TR>
+<TR><TD>4954.18</TD><TD>0.18</TD><TD>0.6</TD><TD>575.4</TD><TD>1853.8</TD><TD>346.0</TD><TD>2146.8</TD><TD>31.7</TD><TD>2999</TD><TD>1.3 GB/s</TD><TD>7</TD><TD>8</TD><TD>2</TD><TD>4</TD><TD>1</TD><TD>6144 KB</TD><TD>31</TD><TD>Intel(R) Xeon(R) CPU E5472 @ 3.00GHz Linux graphics3</TD></TR>
+<TR><TD>5729.04</TD><TD>0.16</TD><TD>0.6</TD><TD>658.0</TD><TD>1836.7</TD><TD>347.4</TD><TD>2854.8</TD><TD>31.6</TD><TD>2999</TD><TD>1.3 GB/s</TD><TD>4</TD><TD>8</TD><TD>2</TD><TD>4</TD><TD>1</TD><TD>6144 KB</TD><TD>31</TD><TD>Intel(R) Xeon(R) CPU E5472 @ 3.00GHz Linux graphics3</TD></TR>
+<TR><TD>13840</TD><TD>0.07</TD><TD>4.5</TD><TD>320.4</TD><TD>2000.5</TD><TD>774.9</TD><TD>10654.7</TD><TD>85.1</TD><TD>1652</TD><TD>505 MB/s</TD><TD>72</TD><TD>288</TD><TD>1</TD><TD>72</TD><TD>4</TD><TD>1024 KB</TD><TD>109</TD><TD>Intel(R) Xeon Phi(TM) CPU 7290 @ 1.50GHz Linux crush18</TD></TR>
+<TR><TD>13840</TD><TD>0.07</TD><TD>4.5</TD><TD>320.4</TD><TD>2000.5</TD><TD>774.9</TD><TD>10654.7</TD><TD>85.1</TD><TD>1698</TD><TD>505 MB/s</TD><TD>72</TD><TD>288</TD><TD>1</TD><TD>72</TD><TD>4</TD><TD>1024 KB</TD><TD>109</TD><TD>Intel(R) Xeon Phi(TM) CPU 7290 @ 1.50GHz Linux crush18</TD></TR>
+<TR><TD>18759.4</TD><TD>0.05</TD><TD>1.8</TD><TD>2479.4</TD><TD>3748.8</TD><TD>729.7</TD><TD>11709.7</TD><TD>90.0</TD><TD>3200</TD><TD>537 MB/s</TD><TD>2</TD><TD>4</TD><TD>2</TD><TD>1</TD><TD>2</TD><TD>2048 KB</TD><TD>15</TD><TD>Intel(R) Xeon(TM) CPU 3.20GHz Linux dataserver2</TD></TR>
+<TR><TD>84304.3</TD><TD>0.01</TD><TD>1.6</TD><TD>1174.9</TD><TD>75887.3</TD><TD>1370.8</TD><TD>5800.9</TD><TD>68.8</TD><TD>2000</TD><TD>87.0 MB/s</TD><TD>4</TD><TD>4</TD><TD>2</TD><TD>2</TD><TD>1</TD><TD>4096 KB</TD><TD>3</TD><TD>Intel(R) Xeon(R) CPU 5130 @ 2.00GHz Linux archive2</TD></TR>
+<TR ALIGN=CENTER VALIGN=CENTER>
+<TD>Total (s)</TD>
+<TD>speed</TD>
+<TD>import</TD>
+<TD>find spots</TD>
+<TD>index</TD>
+<TD>refine</TD>
+<TD>integrate</TD>
+<TD>export</TD>
+<TD>MHz</TD>
+<TD>disk data rate</TD>
+<TD>nproc =</TD>
+<TD>CPUs</TD>
+<TD>sockets</TD>
+<TD>cores / socket</TD>
+<TD>thds / core</TD>
+<TD>cache</TD>
+<TD>sys mem (GB)</TD>
+<TD>machine description</TD>
+</TR>
+</TABLE>
+
+
+<H1>
+<a NAME=XDS>
+<HR WIDTH="100%"><FONT COLOR="#004000"><FONT SIZE=+2>Speed of XDS</FONT></FONT></H1>
+
+<P><FONT SIZE=+1>The following are the results of processing a 3600-image data set of
+lysozyme from a Pilatus-sized detector in XDS. By using simulated images, the download
+size of the test data is only 10 MB.  Everything is downloaded and decompressed automatically 
+using this script
+ <A HREF="http://bl831.als.lbl.gov/~jamesh/benchmarks/xds/xds_bench.com">xds_bench.com</A>.
+Or, if your machine is off-internet, all the files you need are in this tarball 
+<a href="http://bl831.als.lbl.gov/~jamesh/benchmarks/xds/xds_bench.tgz">xds_bench.tgz</a>.
+The BACKGROUND_RANGE is set to 50 images, but all other aspects of the 
+INIT COLSPOT IDXREF INTEGRATE and CORRECT steps are using all 3600 images.
+Note that the optimal 
+<a href=http://xds.mpimf-heidelberg.mpg.de/html_doc/xds_parameters.html#MAXIMUM_NUMBER_OF_JOBS=>MAXIMUM_NUMBER_OF_JOBS=</a>,
+<a href=http://xds.mpimf-heidelberg.mpg.de/html_doc/xds_parameters.html#MAXIMUM_NUMBER_OF_PROCESSORS=>MAXIMUM_NUMBER_OF_PROCESSORS=</a>,
+and
+<a href=http://xds.mpimf-heidelberg.mpg.de/html_doc/xds_parameters.html#NUMBER_OF_IMAGES_IN_CACHE=>NUMBER_OF_IMAGES_IN_CACHE=</a>
+are different for each stage, so a list of the options used for each stage is shown.
+I strongly encourage anyone out there with a new machine running Linux or Mac OSX
+to give this a try.  This list shows only the best result from each machine.  The full list of all
+timings (~9000 runs) is available in <a href=xds/sorted.txt>this file</a>. You may have different ideas about how to evaluate it.
+I think all us
+crystallographers could really use a standard reference for the &quot;speed
+of XDS&quot; on linux systems, since it seems to be very difficult (for me
+at least) to predict how any particular system is going to perform.</FONT></P>
+Please run this benchmark on your own Linux/Mac machine by doing this:</p>
+<pre>
+mkdir -p /dev/shm/test/
+cd /dev/shm/test/
+wget http://bl831.als.lbl.gov/~jamesh/benchmarks/xds/xds_bench.com
+chmod a+x ./xds_bench.com
+./xds_bench.com
+</pre>
+or this:
+<pre>
+mkdir -p /dev/shm/test/
+cd /dev/shm/test/
+curl http://bl831.als.lbl.gov/~jamesh/benchmarks/xds/xds_bench.tgz | tar xzvf -
+./xds_bench.com
+</pre>
+
+<TABLE BORDER=1>
+<TR ALIGN=CENTER VALIGN=CENTER>
+<TD>Total (s)</TD>
+<TD>speed</TD>
+<TD>INIT</TD>
+<TD>COLSPOT</TD>
+<TD>IDXREF</TD>
+<TD>INTEGRATE</TD>
+<TD>CORRECT</TD>
+<TD>GHz</TD>
+<TD>disk data rate</TD>
+<TD>JOBS</TD>
+<TD>PROC</TD>
+<TD>IMG CACHE</TD>
+<TD>DELPHI</TD>
+<TD>CPUs</TD>
+<TD>sockets</TD>
+<TD>cores / socket</TD>
+<TD>thds / core</TD>
+<TD>cache</TD>
+<TD>sys mem (GB)</TD>
+<TD>machine description</TD>
+</TR>
+<TR><TD>75.9</TD><TD>1.00</TD><TD>4.0</TD><TD>8.6</TD><TD>4.9</TD><TD>16.4</TD><TD>42.0</TD><TD>2.6</TD><TD>947 MB/s</TD><TD> 1 75 1 19 1</TD><TD> 50 6 99 9 77</TD><TD> 51 224 - 224 -</TD><TD> 50 180 50 180 50</TD><TD>448</TD><TD>8</TD><TD>28</TD><TD>2</TD><TD>39424 KB</TD><TD>3245</TD><TD>Intel(R) Xeon(R) Platinum 8280L CPU @ 2.60GHz Linux octamus1</TD></TR>
+<TR><TD>91.9</TD><TD>0.83</TD><TD>4.2</TD><TD>13.2</TD><TD>6.0</TD><TD>18.4</TD><TD>50.0</TD><TD>3.1</TD><TD>845 MB/s</TD><TD> 1 - 1 20 1</TD><TD> 50 27 - 8 99</TD><TD> 51 192 - 192 -</TD><TD> 50 180 50 180 50</TD><TD>192</TD><TD>8</TD><TD>24</TD><TD>1</TD><TD>61440 KB</TD><TD>2096</TD><TD>Intel(R) Xeon(R) CPU E7-8890 v4 @ 2.20GHz Linux bl121proc00</TD></TR>
+<TR><TD>160.2</TD><TD>0.47</TD><TD>4.6</TD><TD>17.1</TD><TD>29.8</TD><TD>48.1</TD><TD>60.6</TD><TD>2.9</TD><TD>1.7 GB/s</TD><TD> 1 74 1 72 1</TD><TD> 99 4 - 2 172</TD><TD> 51 - - 51 -</TD><TD> 50</TD><TD>144</TD><TD>4</TD><TD>18</TD><TD>2</TD><TD>46080 KB</TD><TD>1081</TD><TD>Intel(R) Xeon(R) CPU E7-8870 v3 @ 2.10GHz Linux dataserver4</TD></TR>
+<TR><TD>176.6</TD><TD>0.43</TD><TD>1.4</TD><TD>32.5</TD><TD>4.3</TD><TD>101.4</TD><TD>36.9</TD><TD>3.1</TD><TD>2.5 GB/s</TD><TD> 1 - 1 - 1</TD><TD> 50 - - 0 -</TD><TD> 51 - - 51 -</TD><TD> 50</TD><TD>64</TD><TD>2</TD><TD>16</TD><TD>2</TD><TD>36864 KB</TD><TD>269</TD><TD>Intel(R) Xeon(R) Gold 6346 CPU @ 3.10GHz Linux hyperion</TD></TR>
+<TR><TD>257.9</TD><TD>0.29</TD><TD>3.8</TD><TD>50.7</TD><TD>5.5</TD><TD>153.9</TD><TD>44.0</TD><TD>2.8</TD><TD>2.2 GB/s</TD><TD> 1 - 1 - 1</TD><TD> 50 - - 0 -</TD><TD> 51 - - 51 -</TD><TD> 50</TD><TD>72</TD><TD>2</TD><TD>18</TD><TD>2</TD><TD>25344 KB</TD><TD>202</TD><TD>Intel(R) Xeon(R) Gold 6140 CPU @ 2.30GHz Linux pxproc01</TD></TR>
+<TR><TD>278.7</TD><TD>0.27</TD><TD>4.1</TD><TD>47.5</TD><TD>25.0</TD><TD>144.7</TD><TD>57.3</TD><TD>3.5</TD><TD>2.0 GB/s</TD><TD> 1 - 1 - 1</TD><TD> 50 - - 0 -</TD><TD> 51 - - 51 -</TD><TD> 50</TD><TD>56</TD><TD>2</TD><TD>14</TD><TD>2</TD><TD>35840 KB</TD><TD>270</TD><TD>Intel(R) Xeon(R) CPU E5-2697 v3 @ 2.60GHz Linux turn15</TD></TR>
+<TR><TD>285.3</TD><TD>0.27</TD><TD>2.4</TD><TD>43.9</TD><TD>72.4</TD><TD>108.6</TD><TD>58.0</TD><TD>2.3</TD><TD>1.7 GB/s</TD><TD> 1 22 1 24 1</TD><TD> 22 3 23 2 24</TD><TD> 51 - - 102 -</TD><TD> 50</TD><TD>48</TD><TD>2</TD><TD>12</TD><TD>2</TD><TD>30720 KB</TD><TD>135</TD><TD>Intel(R) Xeon(R) CPU E5-2670 v3 @ 2.30GHz Linux pxproc18</TD></TR>
+<TR><TD>316.8</TD><TD>0.24</TD><TD>1.9</TD><TD>62.2</TD><TD>4.7</TD><TD>201.6</TD><TD>46.4</TD><TD>3.3</TD><TD>2.9 GB/s</TD><TD> 1 - 1 - 1</TD><TD> 20 - - 0 -</TD><TD> 51 - - 51 -</TD><TD> 50</TD><TD>20</TD><TD>1</TD><TD>10</TD><TD>2</TD><TD>14080 KB</TD><TD>134</TD><TD>Intel(R) Xeon(R) W-2155 CPU @ 3.30GHz Linux graphics1</TD></TR>
+<TR><TD>317.6</TD><TD>0.24</TD><TD>2.4</TD><TD>51.5</TD><TD>70.9</TD><TD>125.9</TD><TD>67.0</TD><TD>2.3</TD><TD>2.0 GB/s</TD><TD> 1 18 1 18 1</TD><TD> 18 3 19 3 20</TD><TD> 51 102 - 51 -</TD><TD> 50</TD><TD>40</TD><TD>2</TD><TD>10</TD><TD>2</TD><TD>25600 KB</TD><TD>67</TD><TD>Intel(R) Xeon(R) CPU E5-2650 v3 @ 2.30GHz Linux dataserver3</TD></TR>
+<TR><TD>346.5</TD><TD>0.22</TD><TD>2.9</TD><TD>52.3</TD><TD>82.7</TD><TD>129.1</TD><TD>79.5</TD><TD>2.6</TD><TD>1.5 GB/s</TD><TD> 1 22 1 18 1</TD><TD> 25 4 15 3 48</TD><TD> 51 - - 51 -</TD><TD> 50</TD><TD>40</TD><TD>2</TD><TD>10</TD><TD>2</TD><TD>25600 KB</TD><TD>134</TD><TD>Intel(R) Xeon(R) CPU E5-2650 v3 @ 2.30GHz Linux claros</TD></TR>
+<TR><TD>350.3</TD><TD>0.22</TD><TD>5.4</TD><TD>35.8</TD><TD>110.8</TD><TD>109.7</TD><TD>88.5</TD><TD>2.5</TD><TD>777 MB/s</TD><TD> 1 32 1 35 1</TD><TD> 64 2 76 2 78</TD><TD> 51 - - 52 -</TD><TD> 50</TD><TD>64</TD><TD>4</TD><TD>8</TD><TD>2</TD><TD>2048 KB</TD><TD>270</TD><TD>AMD Opteron(tm) Processor 6380 Linux dials</TD></TR>
+<TR><TD>381.0</TD><TD>0.20</TD><TD>5.0</TD><TD>42.0</TD><TD>112.0</TD><TD>128.0</TD><TD>94.0</TD><TD>2.7</TD><TD>809 MB/s</TD><TD> 1 30 1 34 1</TD><TD> 61 6 78 2 76</TD><TD> 51 - - 54 -</TD><TD> 50</TD><TD>64</TD><TD>4</TD><TD>8</TD><TD>2</TD><TD>2048 KB</TD><TD>270</TD><TD>AMD Opteron(tm) Processor 6284 SE Linux viper</TD></TR>
+<TR><TD>386.6</TD><TD>0.20</TD><TD>2.1</TD><TD>67.0</TD><TD>70.7</TD><TD>181.3</TD><TD>65.3</TD><TD>2.4</TD><TD>2.2 GB/s</TD><TD> 1 16 1 18 1</TD><TD> 13 1 11 1 19</TD><TD> 51 57 51 102 51</TD><TD> 50</TD><TD>16</TD><TD>2</TD><TD>8</TD><TD>1</TD><TD>20480 KB</TD><TD>134</TD><TD>Intel(R) Xeon(R) CPU E5-2620 v4 @ 2.10GHz Linux psanaphi108</TD></TR>
+<TR><TD>392.5</TD><TD>0.19</TD><TD>3.1</TD><TD>85.9</TD><TD>30.6</TD><TD>193.7</TD><TD>79.2</TD><TD>2.4</TD><TD>2.2 GB/s</TD><TD> 1 9 1 14 1</TD><TD> 22 4 26 2 30</TD><TD> 51 - - 52 -</TD><TD> 50</TD><TD>24</TD><TD>2</TD><TD>6</TD><TD>2</TD><TD>15360 KB</TD><TD>67</TD><TD>Intel(R) Xeon(R) CPU E5-2620 v3 @ 2.40GHz Linux hille</TD></TR>
+<TR><TD>397.4</TD><TD>0.19</TD><TD>2.3</TD><TD>79.9</TD><TD>54.7</TD><TD>192.8</TD><TD>67.7</TD><TD>3.2</TD><TD>2.6 GB/s</TD><TD> 1 8 1 8 1</TD><TD> 8 2 8 2 8</TD><TD> 51 102 - 51 -</TD><TD> 50</TD><TD>16</TD><TD>1</TD><TD>8</TD><TD>2</TD><TD>20480 KB</TD><TD>67</TD><TD>Intel(R) Xeon(R) CPU E5-1660 v4 @ 3.20GHz Linux archive3</TD></TR>
+<TR><TD>407.6</TD><TD>0.19</TD><TD>4.2</TD><TD>60.1</TD><TD>9.0</TD><TD>267.0</TD><TD>67.3</TD><TD>2.7</TD><TD>1.9 GB/s</TD><TD> 1 - 1 1 1</TD><TD> 48 - - 0 -</TD><TD> 51 - - 51 -</TD><TD> 50</TD><TD>48</TD><TD>2</TD><TD>12</TD><TD>2</TD><TD>30720 KB</TD><TD>270</TD><TD>Intel(R) Xeon(R) CPU E5-2650 v4 @ 2.20GHz Linux voltron</TD></TR>
+<TR><TD>446.2</TD><TD>0.17</TD><TD>2.5</TD><TD>95.3</TD><TD>46.0</TD><TD>231.2</TD><TD>71.2</TD><TD>1.2</TD><TD>2.6 GB/s</TD><TD> 1 6 1 6 1</TD><TD> 11 2 6 2 7</TD><TD> 51 - - 51 -</TD><TD> 50</TD><TD>12</TD><TD>1</TD><TD>6</TD><TD>2</TD><TD>15360 KB</TD><TD>67</TD><TD>Intel(R) Xeon(R) CPU E5-1650 v4 @ 3.60GHz Linux graphics1</TD></TR>
+<TR><TD>447.7</TD><TD>0.17</TD><TD>3.6</TD><TD>94.2</TD><TD>33.5</TD><TD>220.2</TD><TD>96.1</TD><TD>2.4</TD><TD>2.0 GB/s</TD><TD> 1 14 1 12 1</TD><TD> 24 2 28 2 29</TD><TD> 51 - - 51 -</TD><TD> 50</TD><TD>24</TD><TD>2</TD><TD>6</TD><TD>2</TD><TD>15360 KB</TD><TD>67</TD><TD>Intel(R) Xeon(R) CPU E5-2620 v3 @ 2.40GHz Linux xenopus</TD></TR>
+<TR><TD>450.0</TD><TD>0.17</TD><TD>2.0</TD><TD>92.0</TD><TD>4.0</TD><TD>304.0</TD><TD>48.0</TD><TD>5.0</TD><TD>3.4 GB/s</TD><TD> 1 - 1 - 1</TD><TD> 16 - - 0 -</TD><TD> 51 - - 51 -</TD><TD> 50</TD><TD>16</TD><TD>1</TD><TD>8</TD><TD>2</TD><TD>16384 KB</TD><TD>33</TD><TD>Intel(R) Core(TM) i9-9900K CPU @ 3.60GHz Linux jrt</TD></TR>
+<TR><TD>451.7</TD><TD>0.17</TD><TD>2.6</TD><TD>47.7</TD><TD>17.8</TD><TD>330.2</TD><TD>53.3</TD><TD>2.9</TD><TD>1.7 GB/s</TD><TD> 1 - 1 - 1</TD><TD> 28 - - 0 -</TD><TD> 51 - - 51 -</TD><TD> 50</TD><TD>28</TD><TD>2</TD><TD>14</TD><TD>1</TD><TD>35840 KB</TD><TD>67</TD><TD>Intel(R) Xeon(R) CPU E5-2680 v4 @ 2.40GHz Linux mxoar3-2203</TD></TR>
+<TR><TD>457.7</TD><TD>0.17</TD><TD>3.2</TD><TD>90.4</TD><TD>77.0</TD><TD>198.1</TD><TD>89.0</TD><TD>1.6</TD><TD>1.8 GB/s</TD><TD> 1 12 1 12 1</TD><TD> 10 2 12 2 28</TD><TD> 51 51 - 51 51</TD><TD> 50</TD><TD>24</TD><TD>2</TD><TD>6</TD><TD>2</TD><TD>12288 KB</TD><TD>50</TD><TD>Intel(R) Xeon(R) CPU X5690 @ 3.47GHz Linux touchscreen2</TD></TR>
+<TR><TD>463.7</TD><TD>0.16</TD><TD>2.5</TD><TD>89.5</TD><TD>71.9</TD><TD>227.4</TD><TD>72.4</TD><TD>3.1</TD><TD>2.3 GB/s</TD><TD> 1 12 1 12 1</TD><TD> 10 1 13 1 14</TD><TD> 51 51 51 51 51</TD><TD> 50</TD><TD>12</TD><TD>2</TD><TD>6</TD><TD>1</TD><TD>15360 KB</TD><TD>134</TD><TD>Intel(R) Xeon(R) CPU E5-2620 v3 @ 2.40GHz Linux psanagpu101</TD></TR>
+<TR><TD>485.9</TD><TD>0.16</TD><TD>2.8</TD><TD>97.3</TD><TD>7.7</TD><TD>303.5</TD><TD>74.7</TD><TD>2.0</TD><TD>1.3 GB/s</TD><TD> 1 - 1 - 1</TD><TD> 24 - - 0 -</TD><TD> 51 - - 51 -</TD><TD> 50</TD><TD>24</TD><TD>1</TD><TD>12</TD><TD>2</TD><TD>16896 KB</TD><TD>134</TD><TD>Intel(R) Xeon(R) Silver 4116 CPU @ 2.10GHz Linux gateway2</TD></TR>
+<TR><TD>495.2</TD><TD>0.15</TD><TD>3.1</TD><TD>120.4</TD><TD>24.2</TD><TD>266.4</TD><TD>81.2</TD><TD>3.8</TD><TD>2.4 GB/s</TD><TD> 1 6 1 7 1</TD><TD> 11 2 16 2 18</TD><TD> 51 - - 52 -</TD><TD> 50</TD><TD>12</TD><TD>1</TD><TD>6</TD><TD>2</TD><TD>15360 KB</TD><TD>134</TD><TD>Intel(R) Xeon(R) CPU E5-1650 v3 @ 3.50GHz Linux venus</TD></TR>
+<TR><TD>513.9</TD><TD>0.15</TD><TD>6.4</TD><TD>176.5</TD><TD>33.9</TD><TD>219.1</TD><TD>77.9</TD><TD>2.3</TD><TD>438 MB/s</TD><TD> 1 - 1 - 1</TD><TD> 50 - - 0 -</TD><TD> 51 - - 51 -</TD><TD> 50</TD><TD>72</TD><TD>2</TD><TD>18</TD><TD>2</TD><TD>46080 KB</TD><TD>135</TD><TD>Intel(R) Xeon(R) CPU E5-2697 v4 @ 2.30GHz Linux ebw18</TD></TR>
+<TR><TD>533.3</TD><TD>0.14</TD><TD>2.6</TD><TD>74.1</TD><TD>20.4</TD><TD>367.7</TD><TD>68.5</TD><TD>3.5</TD><TD>2.6 GB/s</TD><TD> 1 - 1 - 1</TD><TD> 20 - - 0 -</TD><TD> 51 - - 51 -</TD><TD> 50</TD><TD>20</TD><TD>2</TD><TD>10</TD><TD>1</TD><TD>25600 KB</TD><TD>67</TD><TD>Intel(R) Xeon(R) CPU E5-2680 v2 @ 2.80GHz Linux mxoar2-1607</TD></TR>
+<TR><TD>560.4</TD><TD>0.14</TD><TD>3.3</TD><TD>126.6</TD><TD>56.6</TD><TD>285.8</TD><TD>88.1</TD><TD>3.4</TD><TD>2.4 GB/s</TD><TD> 1 7 1 6 1</TD><TD> 12 2 14 2 14</TD><TD> 51 - - 51 -</TD><TD> 50</TD><TD>12</TD><TD>1</TD><TD>6</TD><TD>2</TD><TD>15360 KB</TD><TD>33</TD><TD>Intel(R) Core(TM) i7-5820K CPU @ 3.30GHz Linux jklinuxse</TD></TR>
+<TR><TD>591.0</TD><TD>0.13</TD><TD>2.5</TD><TD>155.8</TD><TD>4.6</TD><TD>371.1</TD><TD>57.0</TD><TD>3.2</TD><TD>2.64 GB/s</TD><TD> 1 - 1 1 1</TD><TD> 12 - - 0 -</TD><TD> 51 - - 51 -</TD><TD> 50</TD><TD>12</TD><TD>12</TD><TD>6</TD><TD>2</TD><TD>256 KB</TD><TD>34</TD><TD>n/d 260141638 256 KB n/d Darwin macmini</TD></TR>
+<TR><TD>612.2</TD><TD>0.12</TD><TD>12.3</TD><TD>82.5</TD><TD>25.5</TD><TD>204.1</TD><TD>287.7</TD><TD>1.7</TD><TD>579 MB/s</TD><TD> 1 80 1 98 1</TD><TD> 50 2 69 2 -</TD><TD> 51 54 1 1 -</TD><TD> 50</TD><TD>288</TD><TD>1</TD><TD>72</TD><TD>4</TD><TD>1024 KB</TD><TD>117</TD><TD>Intel(R) Xeon Phi(TM) CPU 7290 @ 1.50GHz Linux crush18</TD></TR>
+<TR><TD>691.8</TD><TD>0.11</TD><TD>4.1</TD><TD>174.1</TD><TD>24.3</TD><TD>396.1</TD><TD>93.2</TD><TD>3.5</TD><TD>3.3 GB/s</TD><TD> 1 4 1 4 1</TD><TD> 8 2 11 2 9</TD><TD> 51 51 - 51 51</TD><TD> 50</TD><TD>8</TD><TD>1</TD><TD>4</TD><TD>2</TD><TD>8192 KB</TD><TD>16</TD><TD>Intel(R) Xeon(R) CPU E3-1241 v3 @ 3.50GHz Linux smblx30</TD></TR>
+<TR><TD>725.8</TD><TD>0.10</TD><TD>4.8</TD><TD>156.1</TD><TD>104.1</TD><TD>337.6</TD><TD>123.1</TD><TD>1.6</TD><TD>2.4 GB/s</TD><TD> 1 8 1 8 1</TD><TD> 16 2 19 2 19</TD><TD> 51 - - 51 -</TD><TD> 50</TD><TD>16</TD><TD>2</TD><TD>4</TD><TD>2</TD><TD>8192 KB</TD><TD>25</TD><TD>Intel(R) Xeon(R) CPU X5550 @ 2.67GHz Linux pxproc09</TD></TR>
+<TR><TD>863.2</TD><TD>0.09</TD><TD>3.8</TD><TD>188.8</TD><TD>6.2</TD><TD>576.6</TD><TD>87.8</TD><TD>3.3</TD><TD>2.08 GB/s</TD><TD> 1 - 1 1 1</TD><TD> 8 - - 0 -</TD><TD> 51 - - 51 -</TD><TD> 50</TD><TD>8</TD><TD>8</TD><TD>4</TD><TD>9</TD><TD>256 KB</TD><TD>17</TD><TD>n/d 1479463068 256 KB n/d Darwin biopro14</TD></TR>
+<TR><TD>922.6</TD><TD>0.08</TD><TD>6.2</TD><TD>196.6</TD><TD>109.4</TD><TD>475.9</TD><TD>134.4</TD><TD>2.4</TD><TD>1.3 GB/s</TD><TD> 1 7 1 8 1</TD><TD> 8 2 9 1 9</TD><TD> 51 - 51 51 -</TD><TD> 50</TD><TD>8</TD><TD>2</TD><TD>4</TD><TD>1</TD><TD>6144 KB</TD><TD>33</TD><TD>Intel(R) Xeon(R) CPU E5472 @ 3.00GHz Linux crush17</TD></TR>
+<TR><TD>926.0</TD><TD>0.08</TD><TD>6.2</TD><TD>195.9</TD><TD>115.3</TD><TD>474.6</TD><TD>134.0</TD><TD>3.0</TD><TD>1.3 GB/s</TD><TD> 1 7 1 8 1</TD><TD> 7 2 9 1 9</TD><TD> 51 - 51 51 -</TD><TD> 50</TD><TD>8</TD><TD>2</TD><TD>4</TD><TD>1</TD><TD>6144 KB</TD><TD>33</TD><TD>Intel(R) Xeon(R) CPU E5472 @ 3.00GHz Linux graphics3</TD></TR>
+<TR><TD>988.5</TD><TD>0.08</TD><TD>4.0</TD><TD>93.2</TD><TD>329.2</TD><TD>217.4</TD><TD>344.6</TD><TD>1.4</TD><TD>654 MB/s</TD><TD> 50 50 50 50 50</TD><TD> 5 5 99 5 99</TD><TD> 51 51 6 51 6</TD><TD> 5</TD><TD>256</TD><TD>1</TD><TD>64</TD><TD>4</TD><TD>1024 KB</TD><TD>206</TD><TD>Intel(R) Xeon Phi(TM) CPU 7210 @ 1.30GHz Linux turn33</TD></TR>
+<TR><TD>990.0</TD><TD>0.08</TD><TD>5.0</TD><TD>168.0</TD><TD>42.0</TD><TD>642.0</TD><TD>133.0</TD><TD>1.4</TD><TD>1.0 GB/s</TD><TD> 1 - 1 - 1</TD><TD> 16 - - 0 -</TD><TD> 51 - - 51 -</TD><TD> 50</TD><TD>16</TD><TD>1</TD><TD>8</TD><TD>2</TD><TD>2048 KB</TD><TD>101</TD><TD>AMD Opteron(tm) Processor 6376 Linux bcsb-cnx</TD></TR>
+<TR><TD>1003.0</TD><TD>0.08</TD><TD>5.0</TD><TD>172.0</TD><TD>42.0</TD><TD>649.0</TD><TD>135.0</TD><TD>1.4</TD><TD>1.0 GB/s</TD><TD> 1 - 1 - 1</TD><TD> 16 - - 0 -</TD><TD> 51 - - 51 -</TD><TD> 50</TD><TD>16</TD><TD>1</TD><TD>8</TD><TD>2</TD><TD>2048 KB</TD><TD>135</TD><TD>AMD Opteron(tm) Processor 6376 Linux bcsb-nx</TD></TR>
+<TR><TD>1237.4</TD><TD>0.06</TD><TD>11.0</TD><TD>287.7</TD><TD>118.9</TD><TD>667.7</TD><TD>152.0</TD><TD>3.0</TD><TD>1.0 GB/s</TD><TD> 1 8 1 8 1</TD><TD> 8 1 9 1 9</TD><TD> 51 - - 51 -</TD><TD> 50</TD><TD>8</TD><TD>2</TD><TD>4</TD><TD>1</TD><TD>4096 KB</TD><TD>16</TD><TD>Intel(R) Xeon(R) CPU X5365 @ 3.00GHz Linux homeserver2</TD></TR>
+<TR><TD>2153.6</TD><TD>0.04</TD><TD>12.9</TD><TD>546.6</TD><TD>89.6</TD><TD>1278.8</TD><TD>225.7</TD><TD>1.6</TD><TD>158 MB/s</TD><TD> 1 4 1 4 1</TD><TD> 4 1 4 1 4</TD><TD> 6 6 6 6 6</TD><TD> 50</TD><TD>4</TD><TD>1</TD><TD>4</TD><TD>1</TD><TD>4096 KB</TD><TD>4</TD><TD>Intel(R) Core(TM)2 Quad CPU Q6700 @ 2.66GHz Linux bl831</TD></TR>
+<TR><TD>3067.0</TD><TD>0.02</TD><TD>15.5</TD><TD>743.9</TD><TD>55.3</TD><TD>1967.4</TD><TD>284.9</TD><TD>3.1</TD><TD>1.07 GB/s</TD><TD> 1 3 1 1 1</TD><TD> 2 1 2 2 2</TD><TD> 51 - 51 51 -</TD><TD> 50</TD><TD>2</TD><TD>2</TD><TD>2</TD><TD>2</TD><TD>6144 KB</TD><TD>4</TD><TD>n/d 2028621756 6144 KB n/d Darwin imac1</TD></TR>
+<TR><TD>5341.7</TD><TD>0.01</TD><TD>26.2</TD><TD>1489.6</TD><TD>131.5</TD><TD>3227.9</TD><TD>466.5</TD><TD>3.2</TD><TD>534 MB/s</TD><TD> 1 2 1 2 1</TD><TD> 4 2 4 2 4</TD><TD> 51 51 51 51 51</TD><TD> 50</TD><TD>4</TD><TD>2</TD><TD>1</TD><TD>2</TD><TD>2048 KB</TD><TD>16</TD><TD>Intel(R) Xeon(TM) CPU 3.20GHz Linux dataserver2</TD></TR>
+<TR><TD>10596.5</TD><TD>0.01</TD><TD>15.3</TD><TD>708.9</TD><TD>119.4</TD><TD>9455.2</TD><TD>297.7</TD><TD>2.0</TD><TD>435 MB/s</TD><TD> 1 4 1 4 1</TD><TD> 4 1 4 1 4</TD><TD> 51 51 51 51 -</TD><TD> 50</TD><TD>4</TD><TD>2</TD><TD>2</TD><TD>1</TD><TD>4096 KB</TD><TD>4</TD><TD>Intel(R) Xeon(R) CPU 5130 @ 2.00GHz Linux archive2</TD></TR>
+<TR ALIGN=CENTER VALIGN=CENTER>
+<TD>Total (s)</TD>
+<TD>speed</TD>
+<TD>INIT</TD>
+<TD>COLSPOT</TD>
+<TD>IDXREF</TD>
+<TD>INTEGRATE</TD>
+<TD>CORRECT</TD>
+<TD>GHz</TD>
+<TD>disk data rate</TD>
+<TD>JOBS</TD>
+<TD>PROC</TD>
+<TD>IMG CACHE</TD>
+<TD>DELPHI</TD>
+<TD>CPUs</TD>
+<TD>sockets</TD>
+<TD>cores / socket</TD>
+<TD>thds / core</TD>
+<TD>cache</TD>
+<TD>sys mem (GB)</TD>
+<TD>machine description</TD>
+</TR>
+</TABLE>
+<p>
+<HR WIDTH="100%"></P>
+
+<a NAME=phenixrefine>
+<H1><FONT COLOR="#004000"><FONT SIZE=+2>Speed of phenix.refine</FONT></FONT></H1>
+
+<P><FONT SIZE=+1>These results are from a 
+<A HREF="phenixrefine_bmark.tgz">3-macocycle phenix.refine job</A> (12kD protein, 1.8A) </FONT></P>
+Please run this benchmark on your own Linux/Mac machine by doing this:</p>
+<pre>
+curl http://bl831.als.lbl.gov/~jamesh/benchmarks/phenixrefine_bmark.tgz | tar xzvf -
+./test.com
+</pre>
+
+<TABLE BORDER=1>
+<TR ALIGN=CENTER VALIGN=CENTER>
+<TD>runtime (s)</TD>
+<TD>speed</TD>
+<TD>version</TD>
+<TD>GHz</TD>
+<TD>family</TD>
+<TD>model</TD>
+<TD>stepping</TD>
+<TD>microcode</TD>
+<TD>cache</TD>
+<TD>sys mem (GB)</TD>
+<TD>machine description</TD>
+</TR>
+<TR><TD>77.95</TD><TD>1.00</TD><TD>1.13</TD><TD>3.6</TD><TD>6</TD><TD>106</TD><TD>6</TD><TD>0xd000311</TD><TD>36864 KB</TD><TD>269</TD><TD>Intel(R) Xeon(R) Gold 6346 CPU @ 3.10GHz Linux hyperion</TD></TR>
+<TR><TD>97.15</TD><TD>0.80</TD><TD>dev</TD><TD>3.1</TD><TD>6</TD><TD>85</TD><TD>4</TD><TD>0x200003a</TD><TD>14080 KB</TD><TD>134</TD><TD>Intel(R) Xeon(R) W-2155 CPU @ 3.30GHz Linux graphics2b</TD></TR>
+<TR><TD>112.49</TD><TD>0.69</TD><TD>1.10.1</TD><TD>3.8</TD><TD>6</TD><TD>63</TD><TD>2</TD><TD>0x38</TD><TD>15360 KB</TD><TD>134</TD><TD>Intel(R) Xeon(R) CPU E5-1650 v3 @ 3.50GHz Linux venus</TD></TR>
+<TR><TD>114.10</TD><TD>0.68</TD><TD>1.11.1</TD><TD>3.6</TD><TD>6</TD><TD>79</TD><TD>1</TD><TD>184549399</TD><TD>15360 KB</TD><TD>67</TD><TD>Intel(R) Xeon(R) CPU E5-1650 v4 @ 3.60GHz Linux graphics1</TD></TR>
+<TR><TD>114.79</TD><TD>0.68</TD><TD>1.11.1</TD><TD>3.5</TD><TD>6</TD><TD>60</TD><TD>3</TD><TD>32</TD><TD>8192 KB</TD><TD>16</TD><TD>Intel(R) Xeon(R) CPU E3-1241 v3 @ 3.50GHz Linux smblx30</TD></TR>
+<TR><TD>117.72</TD><TD>0.66</TD><TD>1.14</TD><TD>2.6</TD><TD>6</TD><TD>85</TD><TD>5</TD><TD>0x3000010</TD><TD>39424 KB</TD><TD>3245</TD><TD>Intel(R) Xeon(R) Platinum 8280L CPU @ 2.60GHz Linux octamus1</TD></TR>
+<TR><TD>122.51</TD><TD>0.64</TD><TD>dev</TD><TD>3.2</TD><TD>6</TD><TD>79</TD><TD>1</TD><TD>184549403</TD><TD>20480 KB</TD><TD>67</TD><TD>Intel(R) Xeon(R) CPU E5-1660 v4 @ 3.20GHz Linux archive3</TD></TR>
+<TR><TD>129.15</TD><TD>0.60</TD><TD>1.11.1</TD><TD>3.6</TD><TD>6</TD><TD>63</TD><TD>2</TD><TD>0x2d</TD><TD>15360 KB</TD><TD>33</TD><TD>Intel(R) Core(TM) i7-5820K CPU @ 3.30GHz Linux jklinuxse</TD></TR>
+<TR><TD>137.02</TD><TD>0.57</TD><TD>1.11.1</TD><TD>2.1</TD><TD>6</TD><TD>85</TD><TD>4</TD><TD>0x2000043</TD><TD>16896 KB</TD><TD>134</TD><TD>Intel(R) Xeon(R) Silver 4116 CPU @ 2.10GHz Linux gateway2</TD></TR>
+<TR><TD>137.02</TD><TD>0.57</TD><TD>dev</TD><TD>2.1</TD><TD>6</TD><TD>85</TD><TD>4</TD><TD>0x2000043</TD><TD>16896 KB</TD><TD>134</TD><TD>Intel(R) Xeon(R) Silver 4116 CPU @ 2.10GHz Linux gateway2</TD></TR>
+<TR><TD>138.55</TD><TD>0.56</TD><TD>1.11.1</TD><TD>2.4</TD><TD>6</TD><TD>63</TD><TD>2</TD><TD>45</TD><TD>15360 KB</TD><TD>67</TD><TD>Intel(R) Xeon(R) CPU E5-2620 v3 @ 2.40GHz Linux hille</TD></TR>
+<TR><TD>145.45</TD><TD>0.54</TD><TD>dev</TD><TD>2.3</TD><TD>6</TD><TD>63</TD><TD>2</TD><TD>57</TD><TD>25600 KB</TD><TD>67</TD><TD>Intel(R) Xeon(R) CPU E5-2650 v3 @ 2.30GHz Linux dataserver3</TD></TR>
+<TR><TD>147.13</TD><TD>0.53</TD><TD>1.11.1</TD><TD>2.3</TD><TD>6</TD><TD>63</TD><TD>2</TD><TD>57</TD><TD>30720 KB</TD><TD>135</TD><TD>Intel(R) Xeon(R) CPU E5-2670 v3 @ 2.30GHz Linux pxproc18</TD></TR>
+<TR><TD>163.28</TD><TD>0.48</TD><TD>dev</TD><TD>3.5</TD><TD>6</TD><TD>44</TD><TD>2</TD><TD>n/d</TD><TD>12288 KB</TD><TD>50</TD><TD>Intel(R) Xeon(R) CPU X5690 @ 3.47GHz Linux touchscreen2</TD></TR>
+<TR><TD>166.32</TD><TD>0.47</TD><TD>dev</TD><TD>2.9</TD><TD>6</TD><TD>63</TD><TD>3</TD><TD>0xa</TD><TD>46080 KB</TD><TD>1081</TD><TD>Intel(R) Xeon(R) CPU E7-8870 v3 @ 2.10GHz Linux dataserver4</TD></TR>
+<TR><TD>178.99</TD><TD>0.44</TD><TD>1.11.1</TD><TD>2.4</TD><TD>6</TD><TD>63</TD><TD>2</TD><TD>45</TD><TD>15360 KB</TD><TD>67</TD><TD>Intel(R) Xeon(R) CPU E5-2620 v3 @ 2.40GHz Linux xenopus</TD></TR>
+<TR><TD>200.47</TD><TD>0.39</TD><TD>1.11.1</TD><TD>2.7</TD><TD>6</TD><TD>26</TD><TD>5</TD><TD>25</TD><TD>8192 KB</TD><TD>25</TD><TD>Intel(R) Xeon(R) CPU X5550 @ 2.67GHz Linux pxproc09</TD></TR>
+<TR><TD>203.16</TD><TD>0.38</TD><TD>1.11.1</TD><TD>2.6</TD><TD>6</TD><TD>63</TD><TD>2</TD><TD>0x38</TD><TD>25600 KB</TD><TD>134</TD><TD>Intel(R) Xeon(R) CPU E5-2650 v3 @ 2.30GHz Linux claros</TD></TR>
+<TR><TD>206.06</TD><TD>0.38</TD><TD>dev</TD><TD>2.5</TD><TD>21</TD><TD>2</TD><TD>0</TD><TD>0x6000822</TD><TD>2048 KB</TD><TD>270</TD><TD>AMD Opteron(tm) Processor 6380 Linux dials</TD></TR>
+<TR><TD>220.23</TD><TD>0.35</TD><TD>dev</TD><TD>3.0</TD><TD>6</TD><TD>23</TD><TD>10</TD><TD>2571</TD><TD>6144 KB</TD><TD>33</TD><TD>Intel(R) Xeon(R) CPU E5472 @ 3.00GHz Linux graphics3</TD></TR>
+<TR><TD>221.67</TD><TD>0.35</TD><TD>dev</TD><TD>3.0</TD><TD>6</TD><TD>23</TD><TD>10</TD><TD>2571</TD><TD>6144 KB</TD><TD>33</TD><TD>Intel(R) Xeon(R) CPU E5472 @ 3.00GHz Linux crush17</TD></TR>
+<TR><TD>226.50</TD><TD>0.34</TD><TD>dev</TD><TD>2.7</TD><TD>21</TD><TD>1</TD><TD>2</TD><TD>n/d</TD><TD>2048 KB</TD><TD>270</TD><TD>AMD Opteron(tm) Processor 6284 SE Linux viper</TD></TR>
+<TR><TD>243.25</TD><TD>0.32</TD><TD>dev</TD><TD>3.0</TD><TD>6</TD><TD>15</TD><TD>11</TD><TD>188</TD><TD>4096 KB</TD><TD>16</TD><TD>Intel(R) Xeon(R) CPU X5365 @ 3.00GHz Linux homeserver2</TD></TR>
+<TR><TD>260.60</TD><TD>0.30</TD><TD>dev</TD><TD>2.1</TD><TD>6</TD><TD>15</TD><TD>11</TD><TD>186</TD><TD>4096 KB</TD><TD>4</TD><TD>Intel(R) Core(TM)2 Quad CPU Q6700 @ 2.66GHz Linux bl831</TD></TR>
+<TR><TD>280.54</TD><TD>0.28</TD><TD>1.11.1</TD><TD>2.0</TD><TD>6</TD><TD>42</TD><TD>1</TD><TD>0x1</TD><TD>4096 KB</TD><TD>3</TD><TD>Intel Xeon E312xx (Sandy Bridge) Linux pslogin7d</TD></TR>
+<TR><TD>364.70</TD><TD>0.21</TD><TD>dev</TD><TD>2.0</TD><TD>6</TD><TD>15</TD><TD>6</TD><TD>n/d</TD><TD>4096 KB</TD><TD>4</TD><TD>Intel(R) Xeon(R) CPU 5130 @ 2.00GHz Linux archive2</TD></TR>
+<TR><TD>579.59</TD><TD>0.13</TD><TD>dev</TD><TD>3.2</TD><TD>15</TD><TD>4</TD><TD>10</TD><TD>n/d</TD><TD>2048 KB</TD><TD>16</TD><TD>Intel(R) Xeon(TM) CPU 3.20GHz Linux dataserver2</TD></TR>
+<TR ALIGN=CENTER VALIGN=CENTER>
+<TD>runtime (s)</TD>
+<TD>speed</TD>
+<TD>version</TD>
+<TD>GHz</TD>
+<TD>family</TD>
+<TD>model</TD>
+<TD>stepping</TD>
+<TD>microcode</TD>
+<TD>cache</TD>
+<TD>sys mem (GB)</TD>
+<TD>machine description</TD>
+</TR>
+</TABLE>
+
+
+<a NAME=refmac>
+<H1><FONT COLOR="#004000"><FONT SIZE=+2>Speed of refmac</FONT></FONT></H1>
+
+<P><FONT SIZE=+1>These results are from a 
+<A HREF="refmac_bmark.tgz">10-cycle refmac job</A> (12kD protein, 1.8A) </FONT></P>
+Please run this benchmark on your own Linux/Mac machine by doing this:</p>
+<pre>
+curl http://bl831.als.lbl.gov/~jamesh/benchmarks/refmac_bmark.tgz | tar xzvf -
+cd refmac_bmark/
+./test.com
+</pre>
+
+<TABLE BORDER=1>
+<TR ALIGN=CENTER VALIGN=CENTER>
+<TD>runtime (s)</TD>
+<TD>speed</TD>
+<TD>version</TD>
+<TD>GHz</TD>
+<TD>family</TD>
+<TD>model</TD>
+<TD>stepping</TD>
+<TD>microcode</TD>
+<TD>cache</TD>
+<TD>sys mem (GB)</TD>
+<TD>machine description</TD>
+</TR>
+<TR><TD>17.790</TD><TD>1.00</TD><TD>5.8.0230</TD><TD>3.3</TD><TD>6</TD><TD>85</TD><TD>4</TD><TD>0x200004d</TD><TD>14080 KB</TD><TD>134</TD><TD>Intel(R) Xeon(R) W-2155 CPU @ 3.30GHz Linux graphics1</TD></TR>
+<TR><TD>20.735</TD><TD>0.86</TD><TD>5.5.0109</TD><TD>3.3</TD><TD>6</TD><TD>85</TD><TD>4</TD><TD>0x200004d</TD><TD>14080 KB</TD><TD>134</TD><TD>Intel(R) Xeon(R) W-2155 CPU @ 3.30GHz Linux graphics1</TD></TR>
+<TR><TD>22.704</TD><TD>0.78</TD><TD>5.6.0119</TD><TD>3.3</TD><TD>6</TD><TD>85</TD><TD>4</TD><TD>0x200004d</TD><TD>14080 KB</TD><TD>134</TD><TD>Intel(R) Xeon(R) W-2155 CPU @ 3.30GHz Linux graphics1</TD></TR>
+<TR><TD>24.216</TD><TD>0.73</TD><TD>5.8.0085</TD><TD>3.3</TD><TD>6</TD><TD>85</TD><TD>4</TD><TD>0x200004d</TD><TD>14080 KB</TD><TD>134</TD><TD>Intel(R) Xeon(R) W-2155 CPU @ 3.30GHz Linux graphics1</TD></TR>
+<TR><TD>24.732</TD><TD>0.72</TD><TD>5.8.0238</TD><TD>3.3</TD><TD>6</TD><TD>85</TD><TD>4</TD><TD>0x200004d</TD><TD>14080 KB</TD><TD>134</TD><TD>Intel(R) Xeon(R) W-2155 CPU @ 3.30GHz Linux graphics1</TD></TR>
+<TR><TD>25.190</TD><TD>0.71</TD><TD>5.7.0032</TD><TD>3.3</TD><TD>6</TD><TD>85</TD><TD>4</TD><TD>0x200004d</TD><TD>14080 KB</TD><TD>134</TD><TD>Intel(R) Xeon(R) W-2155 CPU @ 3.30GHz Linux graphics1</TD></TR>
+<TR><TD>27</TD><TD>0.66</TD><TD>5.8.0266</TD><TD>3.6</TD><TD>6</TD><TD>85</TD><TD>4</TD><TD>0x2000069</TD><TD>25344 KB</TD><TD>202</TD><TD>Intel(R) Xeon(R) Gold 6140 CPU @ 2.30GHz Linux pxproc01</TD></TR>
+<TR><TD>27.996</TD><TD>0.64</TD><TD>5.5.0066</TD><TD>3.3</TD><TD>6</TD><TD>85</TD><TD>4</TD><TD>0x200004d</TD><TD>14080 KB</TD><TD>134</TD><TD>Intel(R) Xeon(R) W-2155 CPU @ 3.30GHz Linux graphics1</TD></TR>
+<TR><TD>41.445</TD><TD>0.43</TD><TD>5.8.0158</TD><TD>3.3</TD><TD>6</TD><TD>85</TD><TD>4</TD><TD>0x200002c</TD><TD>14080 KB</TD><TD>134</TD><TD>Intel(R) Xeon(R) W-2155 CPU @ 3.30GHz Linux graphics1</TD></TR>
+<TR><TD>42.048</TD><TD>0.42</TD><TD>5.8.0158</TD><TD>3.6</TD><TD>6</TD><TD>106</TD><TD>6</TD><TD>0xd000311</TD><TD>36864 KB</TD><TD>269</TD><TD>Intel(R) Xeon(R) Gold 6346 CPU @ 3.10GHz Linux hyperion</TD></TR>
+<TR><TD>42.435</TD><TD>0.42</TD><TD>5.8.0131</TD><TD>3.3</TD><TD>6</TD><TD>85</TD><TD>4</TD><TD>0x200004d</TD><TD>14080 KB</TD><TD>134</TD><TD>Intel(R) Xeon(R) W-2155 CPU @ 3.30GHz Linux graphics1</TD></TR>
+<TR><TD>43.751</TD><TD>0.41</TD><TD>5.8.0158</TD><TD>3.3</TD><TD>6</TD><TD>85</TD><TD>4</TD><TD>0x200004d</TD><TD>14080 KB</TD><TD>134</TD><TD>Intel(R) Xeon(R) W-2155 CPU @ 3.30GHz Linux graphics1</TD></TR>
+<TR><TD>46.4</TD><TD>0.38</TD><TD>5.8.0135</TD><TD>3.6</TD><TD>6</TD><TD>79</TD><TD>1</TD><TD>184549399</TD><TD>15360 KB</TD><TD>67</TD><TD>Intel(R) Xeon(R) CPU E5-1650 v4 @ 3.60GHz Linux graphics1</TD></TR>
+<TR><TD>48.498</TD><TD>0.37</TD><TD>5.8.0158</TD><TD>3.8</TD><TD>6</TD><TD>79</TD><TD>1</TD><TD>0xb000021</TD><TD>15360 KB</TD><TD>67</TD><TD>Intel(R) Xeon(R) CPU E5-1650 v4 @ 3.60GHz Linux garib-pc-4</TD></TR>
+<TR><TD>48.552</TD><TD>0.37</TD><TD>5.1.24</TD><TD>2.1</TD><TD>6</TD><TD>10</TD><TD>0</TD><TD>n/d</TD><TD>512 KB</TD><TD>2</TD><TD>AMD Athlon(tm) Processor Linux crush05</TD></TR>
+<TR><TD>48.8</TD><TD>0.36</TD><TD>5.8.0158</TD><TD>3.5</TD><TD>6</TD><TD>60</TD><TD>3</TD><TD>32</TD><TD>8192 KB</TD><TD>16</TD><TD>Intel(R) Xeon(R) CPU E3-1241 v3 @ 3.50GHz Linux smblx30</TD></TR>
+<TR><TD>49.1</TD><TD>0.36</TD><TD>5.8.0158</TD><TD>3.2</TD><TD>6</TD><TD>79</TD><TD>1</TD><TD>184549403</TD><TD>20480 KB</TD><TD>67</TD><TD>Intel(R) Xeon(R) CPU E5-1660 v4 @ 3.20GHz Linux archive3</TD></TR>
+<TR><TD>51.1</TD><TD>0.35</TD><TD>5.8.0158</TD><TD>2.6</TD><TD>6</TD><TD>85</TD><TD>5</TD><TD>0x3000010</TD><TD>39424 KB</TD><TD>3245</TD><TD>Intel(R) Xeon(R) Platinum 8280L CPU @ 2.60GHz Linux octamus1</TD></TR>
+<TR><TD>52.749</TD><TD>0.34</TD><TD>5.8.0158</TD><TD>3.8</TD><TD>6</TD><TD>63</TD><TD>2</TD><TD>0x38</TD><TD>15360 KB</TD><TD>134</TD><TD>Intel(R) Xeon(R) CPU E5-1650 v3 @ 3.50GHz Linux venus</TD></TR>
+<TR><TD>56.122</TD><TD>0.32</TD><TD>5.8.0158</TD><TD>3.5</TD><TD>6</TD><TD>63</TD><TD>2</TD><TD>0x2d</TD><TD>15360 KB</TD><TD>33</TD><TD>Intel(R) Core(TM) i7-5820K CPU @ 3.30GHz Linux jklinuxse</TD></TR>
+<TR><TD>56.693</TD><TD>0.31</TD><TD>5.2.0019</TD><TD>2.1</TD><TD>6</TD><TD>10</TD><TD>0</TD><TD>n/d</TD><TD>512 KB</TD><TD>2</TD><TD>AMD Athlon(tm) Processor Linux crush05</TD></TR>
+<TR><TD>57.4</TD><TD>0.31</TD><TD>5.8.0135</TD><TD>3.0</TD><TD>6</TD><TD>79</TD><TD>1</TD><TD>0xb00001d</TD><TD>20480 KB</TD><TD>134</TD><TD>Intel(R) Xeon(R) CPU E5-2620 v4 @ 2.10GHz Linux psanaphi108</TD></TR>
+<TR><TD>58.7</TD><TD>0.30</TD><TD>5.8.0135</TD><TD>3.1</TD><TD>6</TD><TD>63</TD><TD>2</TD><TD>0x38</TD><TD>15360 KB</TD><TD>134</TD><TD>Intel(R) Xeon(R) CPU E5-2620 v3 @ 2.40GHz Linux psanagpu101</TD></TR>
+<TR><TD>61.358</TD><TD>0.29</TD><TD>5.8.0158</TD><TD>3.2</TD><TD>6</TD><TD>63</TD><TD>2</TD><TD>45</TD><TD>15360 KB</TD><TD>67</TD><TD>Intel(R) Xeon(R) CPU E5-2620 v3 @ 2.40GHz Linux hille</TD></TR>
+<TR><TD>61.5</TD><TD>0.29</TD><TD>5.8.0158</TD><TD>3.5</TD><TD>6</TD><TD>44</TD><TD>2</TD><TD>n/d</TD><TD>12288 KB</TD><TD>50</TD><TD>Intel(R) Xeon(R) CPU X5690 @ 3.47GHz Linux touchscreen2</TD></TR>
+<TR><TD>61.8</TD><TD>0.29</TD><TD>5.8.0158</TD><TD>3.1</TD><TD>6</TD><TD>63</TD><TD>2</TD><TD>57</TD><TD>30720 KB</TD><TD>135</TD><TD>Intel(R) Xeon(R) CPU E5-2670 v3 @ 2.30GHz Linux pxproc18</TD></TR>
+<TR><TD>62.199</TD><TD>0.29</TD><TD>5.2.0003</TD><TD>2.1</TD><TD>6</TD><TD>10</TD><TD>0</TD><TD>n/d</TD><TD>512 KB</TD><TD>2</TD><TD>AMD Athlon(tm) Processor Linux crush05</TD></TR>
+<TR><TD>62.931</TD><TD>0.28</TD><TD>5.2.0005</TD><TD>2.1</TD><TD>6</TD><TD>10</TD><TD>0</TD><TD>n/d</TD><TD>512 KB</TD><TD>2</TD><TD>AMD Athlon(tm) Processor Linux crush05</TD></TR>
+<TR><TD>63.4</TD><TD>0.28</TD><TD>5.8.0158</TD><TD>3.0</TD><TD>6</TD><TD>63</TD><TD>2</TD><TD>57</TD><TD>25600 KB</TD><TD>67</TD><TD>Intel(R) Xeon(R) CPU E5-2650 v3 @ 2.30GHz Linux dataserver3</TD></TR>
+<TR><TD>65.491</TD><TD>0.27</TD><TD>5.8.0158</TD><TD>2.1</TD><TD>6</TD><TD>85</TD><TD>4</TD><TD>0x2000043</TD><TD>16896 KB</TD><TD>134</TD><TD>Intel(R) Xeon(R) Silver 4116 CPU @ 2.10GHz Linux gateway2</TD></TR>
+<TR><TD>68.6</TD><TD>0.26</TD><TD>5.8.0158</TD><TD>2.9</TD><TD>6</TD><TD>63</TD><TD>3</TD><TD>0xa</TD><TD>46080 KB</TD><TD>1081</TD><TD>Intel(R) Xeon(R) CPU E7-8870 v3 @ 2.10GHz Linux dataserver4</TD></TR>
+<TR><TD>74.1</TD><TD>0.24</TD><TD>5.8.0158</TD><TD>3.1</TD><TD>6</TD><TD>26</TD><TD>5</TD><TD>25</TD><TD>8192 KB</TD><TD>25</TD><TD>Intel(R) Xeon(R) CPU X5550 @ 2.67GHz Linux pxproc09</TD></TR>
+<TR><TD>77.8</TD><TD>0.23</TD><TD>5.8.0135</TD><TD>3.0</TD><TD>6</TD><TD>63</TD><TD>2</TD><TD>0x38</TD><TD>25600 KB</TD><TD>134</TD><TD>Intel(R) Xeon(R) CPU E5-2650 v3 @ 2.30GHz Linux claros</TD></TR>
+<TR><TD>79.508</TD><TD>0.22</TD><TD>5.8.0158</TD><TD>2.4</TD><TD>6</TD><TD>63</TD><TD>2</TD><TD>45</TD><TD>15360 KB</TD><TD>67</TD><TD>Intel(R) Xeon(R) CPU E5-2620 v3 @ 2.40GHz Linux xenopus</TD></TR>
+<TR><TD>84</TD><TD>0.21</TD><TD>5.8.0158</TD><TD>3.0</TD><TD>6</TD><TD>23</TD><TD>10</TD><TD>2571</TD><TD>6144 KB</TD><TD>33</TD><TD>Intel(R) Xeon(R) CPU E5472 @ 3.00GHz Linux graphics3</TD></TR>
+<TR><TD>84.2</TD><TD>0.21</TD><TD>5.8.0158</TD><TD>3.0</TD><TD>6</TD><TD>23</TD><TD>10</TD><TD>2571</TD><TD>6144 KB</TD><TD>33</TD><TD>Intel(R) Xeon(R) CPU E5472 @ 3.00GHz Linux crush17</TD></TR>
+<TR><TD>85.104</TD><TD>0.21</TD><TD>5.8.0158</TD><TD>3.6</TD><TD>6</TD><TD>79</TD><TD>1</TD><TD>0xb00001d</TD><TD>46080 KB</TD><TD>135</TD><TD>Intel(R) Xeon(R) CPU E5-2697 v4 @ 2.30GHz Linux ebw05</TD></TR>
+<TR><TD>86.016</TD><TD>0.21</TD><TD>5.8.0158</TD><TD>3.7</TD><TD>6</TD><TD>85</TD><TD>4</TD><TD>0x2000026</TD><TD>28160 KB</TD><TD>201</TD><TD>Intel(R) Xeon(R) Gold 6148 CPU @ 2.40GHz Linux epb266</TD></TR>
+<TR><TD>88.3</TD><TD>0.20</TD><TD>5.8.0158</TD><TD>3.0</TD><TD>6</TD><TD>15</TD><TD>11</TD><TD>188</TD><TD>4096 KB</TD><TD>16</TD><TD>Intel(R) Xeon(R) CPU X5365 @ 3.00GHz Linux homeserver2</TD></TR>
+<TR><TD>90.8</TD><TD>0.20</TD><TD>5.8.0158</TD><TD>2.5</TD><TD>21</TD><TD>2</TD><TD>0</TD><TD>0x6000822</TD><TD>2048 KB</TD><TD>270</TD><TD>AMD Opteron(tm) Processor 6380 Linux dials</TD></TR>
+<TR><TD>93.2</TD><TD>0.19</TD><TD>5.8.0135</TD><TD>2.0</TD><TD>6</TD><TD>42</TD><TD>1</TD><TD>0x1</TD><TD>4096 KB</TD><TD>3</TD><TD>Intel Xeon E312xx (Sandy Bridge) Linux pslogin7d</TD></TR>
+<TR><TD>95.2</TD><TD>0.19</TD><TD>5.8.0158</TD><TD>3.4</TD><TD>21</TD><TD>1</TD><TD>2</TD><TD>n/d</TD><TD>2048 KB</TD><TD>270</TD><TD>AMD Opteron(tm) Processor 6284 SE Linux viper</TD></TR>
+<TR><TD>99.4</TD><TD>0.18</TD><TD>5.8.0158</TD><TD>2.7</TD><TD>6</TD><TD>15</TD><TD>11</TD><TD>186</TD><TD>4096 KB</TD><TD>4</TD><TD>Intel(R) Core(TM)2 Quad CPU Q6700 @ 2.66GHz Linux bl831</TD></TR>
+<TR><TD>119.464</TD><TD>0.15</TD><TD>5.8.0230</TD><TD>1.7</TD><TD>6</TD><TD>87</TD><TD>1</TD><TD>0x1b0</TD><TD>1024 KB</TD><TD>117</TD><TD>Intel(R) Xeon Phi(TM) CPU 7290 @ 1.50GHz Linux crush18</TD></TR>
+<TR><TD>146.2</TD><TD>0.12</TD><TD>5.8.0158</TD><TD>2.0</TD><TD>6</TD><TD>15</TD><TD>6</TD><TD>n/d</TD><TD>4096 KB</TD><TD>4</TD><TD>Intel(R) Xeon(R) CPU 5130 @ 2.00GHz Linux archive2</TD></TR>
+<TR><TD>178.038</TD><TD>0.10</TD><TD>5.8.0158</TD><TD>3.0</TD><TD>15</TD><TD>6</TD><TD>4</TD><TD>2</TD><TD>2048 KB</TD><TD>33</TD><TD>Intel(R) Xeon(TM) CPU 3.00GHz Linux homeserver</TD></TR>
+<TR><TD>248.3</TD><TD>0.07</TD><TD>5.8.0158</TD><TD>3.2</TD><TD>15</TD><TD>4</TD><TD>10</TD><TD>n/d</TD><TD>2048 KB</TD><TD>16</TD><TD>Intel(R) Xeon(TM) CPU 3.20GHz Linux dataserver2</TD></TR>
+<TR><TD>439.697</TD><TD>0.04</TD><TD>5.8.0158</TD><TD>1.6</TD><TD>6</TD><TD>87</TD><TD>1</TD><TD>0x19b</TD><TD>1024 KB</TD><TD>118</TD><TD>Intel(R) Xeon Phi(TM) CPU 7250F @ 1.40GHz Linux ekf307</TD></TR>
+<TR><TD>74</TD><TD>0.24</TD><TD>4.0.6</TD><TD>1.4</TD><TD>?</TD><TD>?</TD><TD>?</TD><TD>?</TD><TD>? KB</TD><TD>0</TD><TD>AMD Opteron Linux 1</TD></TR>
+<TR><TD>78</TD><TD>0.23</TD><TD>4.0.6</TD><TD>1.8</TD><TD>?</TD><TD>?</TD><TD>?</TD><TD>?</TD><TD>? KB</TD><TD>0</TD><TD>AMD Athlon Linux 1</TD></TR>
+<TR><TD>80</TD><TD>0.22</TD><TD>4.0.6</TD><TD>1.7</TD><TD>?</TD><TD>?</TD><TD>?</TD><TD>?</TD><TD>? KB</TD><TD>0</TD><TD>AMD Athlon Linux 1</TD></TR>
+<TR><TD>102</TD><TD>0.17</TD><TD>4.0.6</TD><TD>1.8</TD><TD>?</TD><TD>?</TD><TD>?</TD><TD>?</TD><TD>? KB</TD><TD>0</TD><TD>Mac G5 OSX</TD></TR>
+<TR><TD>109</TD><TD>0.16</TD><TD>4.0.6</TD><TD>1.3</TD><TD>?</TD><TD>?</TD><TD>?</TD><TD>?</TD><TD>? KB</TD><TD>0</TD><TD>AMD Athlon Linux 1</TD></TR>
+<TR><TD>132</TD><TD>0.13</TD><TD>4.0.6</TD><TD>0.7</TD><TD>?</TD><TD>?</TD><TD>?</TD><TD>?</TD><TD>? KB</TD><TD>0</TD><TD>DEC alpha OSF</TD></TR>
+<TR><TD>135</TD><TD>0.13</TD><TD>4.0.6</TD><TD>1.1</TD><TD>6</TD><TD>4</TD><TD>2</TD><TD>n/d</TD><TD>256 KB</TD><TD>0</TD><TD>AMD Athlon Linux 1</TD></TR>
+<TR><TD>146</TD><TD>0.12</TD><TD>4.0.6</TD><TD>1.0</TD><TD>?</TD><TD>?</TD><TD>?</TD><TD>?</TD><TD>? KB</TD><TD>0</TD><TD>Intel PIII Linux</TD></TR>
+<TR><TD>185</TD><TD>0.10</TD><TD>4.0.6</TD><TD>0.2</TD><TD>?</TD><TD>?</TD><TD>?</TD><TD>?</TD><TD>? KB</TD><TD>0</TD><TD>SGI Octane R10k Irix</TD></TR>
+<TR><TD>226</TD><TD>0.08</TD><TD>4.0.6</TD><TD>0.8</TD><TD>?</TD><TD>?</TD><TD>?</TD><TD>?</TD><TD>? KB</TD><TD>0</TD><TD>Mac G4 OSX</TD></TR>
+<TR><TD>246</TD><TD>0.07</TD><TD>4.0.6</TD><TD>0.2</TD><TD>?</TD><TD>?</TD><TD>?</TD><TD>?</TD><TD>? KB</TD><TD>0</TD><TD>SGI Origin R10k Irix</TD></TR>
+<TR><TD>248</TD><TD>0.07</TD><TD>4.0.6</TD><TD>0.5</TD><TD>?</TD><TD>?</TD><TD>?</TD><TD>?</TD><TD>? KB</TD><TD>0</TD><TD>Intel PII Linux</TD></TR>
+<TR><TD>382</TD><TD>0.05</TD><TD>4.0.6</TD><TD>0.2</TD><TD>?</TD><TD>?</TD><TD>?</TD><TD>?</TD><TD>? KB</TD><TD>0</TD><TD>SGI O2 R5000 Irix</TD></TR>
+<TR><TD>445</TD><TD>0.04</TD><TD>4.0.6</TD><TD>0.1</TD><TD>?</TD><TD>?</TD><TD>?</TD><TD>?</TD><TD>? KB</TD><TD>0</TD><TD>SGI Indy R5000 Irix</TD></TR>
+<TR><TD>531</TD><TD>0.03</TD><TD>4.0.6</TD><TD>0.2</TD><TD>?</TD><TD>?</TD><TD>?</TD><TD>?</TD><TD>? KB</TD><TD>0</TD><TD>SGI Indigo2 R4400 Irix</TD></TR>
+<TR><TD>1020</TD><TD>0.02</TD><TD>4.0.6</TD><TD>0.1</TD><TD>?</TD><TD>?</TD><TD>?</TD><TD>?</TD><TD>? KB</TD><TD>0</TD><TD>SGI Indy R4600 Irix</TD></TR>
+<TR ALIGN=CENTER VALIGN=CENTER>
+<TD>runtime (s)</TD>
+<TD>speed</TD>
+<TD>version</TD>
+<TD>GHz</TD>
+<TD>family</TD>
+<TD>model</TD>
+<TD>stepping</TD>
+<TD>microcode</TD>
+<TD>cache</TD>
+<TD>sys mem (GB)</TD>
+<TD>machine description</TD>
+</TR>
+</TABLE>
+
+<H1>
+<HR WIDTH="100%"><FONT COLOR="#004000"><FONT SIZE=+2>Speed of Mosflm</FONT></FONT></H1>
+
+<P><FONT SIZE=+1>These are the results from integrating <A HREF="mosflm_bmark.tgz">19 10Mb x-ray images</A>
+in <A HREF="http://www.mrc-lmb.cam.ac.uk/harry/mosflm/mosflm_user_guide.html">mosflm</A>.</FONT></P>
+
+<TABLE BORDER=1 >
+<TR ALIGN=CENTER VALIGN=CENTER>
+<TD>machine</TD><TD>cpu</TD><TD>clock<BR>(MHz)</TD>
+<TD>bus<BR>(MHz)</TD><TD>run time<BR>(s)</TD><TD>relative<BR>speed</TD>
+</TR>
+
+<TR><TD>Linux  </TD><TD>Xeon W-2155</TD><TD>3300</TD><TD>? </TD><TD>  5.9</TD><TD>14.3</TD></TR>
+<TR><TD>Linux  </TD><TD>Xeon E5472</TD><TD>3000</TD><TD>300 </TD><TD>  14</TD><TD>6.00</TD></TR>
+<TR><TD>Linux  </TD><TD>Xeon</TD><TD>3000</TD><TD>750 </TD><TD>  27</TD><TD>3.11</TD></TR>
+<TR><TD>Linux  </TD><TD>P4 Xeon</TD><TD>2800</TD><TD>400 </TD><TD>  40</TD><TD>2.10</TD></TR>
+<TR><TD>DEC    </TD><TD>alpha </TD><TD> 833</TD><TD>333 </TD><TD>  48</TD><TD>1.75</TD></TR>
+<TR><TD>DEC    </TD><TD>alpha </TD><TD> 666</TD><TD>333 </TD><TD>  50</TD><TD>1.68</TD></TR>
+<TR><TD>Linux  </TD><TD>P4 Xeon</TD><TD>2400</TD><TD>333</TD><TD>  55</TD><TD>1.52</TD></TR>
+<TR><TD>Linux  </TD><TD>P4    </TD><TD>1700</TD><TD>400 </TD><TD>  59</TD><TD>1.42</TD></TR>
+<TR><TD>Linux  </TD><TD>Athlon</TD><TD>1700</TD><TD>266 </TD><TD>  62</TD><TD>1.35</TD></TR>
+<TR><TD>Linux  </TD><TD>Athlon</TD><TD>1200</TD><TD>266 </TD><TD>  63</TD><TD>1.33</TD></TR>
+<TR><TD>Linux  </TD><TD>Athlon</TD><TD>1800</TD><TD>266 </TD><TD>  65</TD><TD>1.29</TD></TR>
+<TR><TD>Linux  </TD><TD>Opteron</TD><TD>1400</TD><TD>333 </TD><TD> 72</TD><TD>1.17</TD></TR>
+<TR><TD>Linux  </TD><TD>PIII  </TD><TD>1000</TD><TD>133 </TD><TD>  84</TD><TD>1.00</TD></TR>
+<TR><TD>Linux  </TD><TD>Athlon</TD><TD>1100</TD><TD>133 </TD><TD>  85</TD><TD>0.99</TD></TR>
+<TR><TD>DEC    </TD><TD>alpha </TD><TD> 666</TD><TD>133 </TD><TD>  88</TD><TD>0.95</TD></TR>
+<TR><TD>DEC    </TD><TD>alpha </TD><TD> 599</TD><TD>133 </TD><TD>  95</TD><TD>0.88</TD></TR>
+<TR><TD>OSX    </TD><TD>G5    </TD><TD>1800</TD><TD>900 </TD><TD>  96</TD><TD>0.88</TD></TR>
+<TR><TD>Linux  </TD><TD>PIII  </TD><TD> 800</TD><TD>100 </TD><TD> 180</TD><TD>0.47</TD></TR>
+<TR><TD>Linux  </TD><TD>PII   </TD><TD> 450</TD><TD>100 </TD><TD> 190</TD><TD>0.44</TD></TR>
+<TR><TD>OSX    </TD><TD>G4    </TD><TD> 800</TD><TD>100 </TD><TD> 227</TD><TD>0.37</TD></TR>
+<TR><TD>Octane </TD><TD>R10k  </TD><TD> 250</TD><TD>100?</TD><TD> 258</TD><TD>0.33</TD></TR>
+<TR><TD>Octane </TD><TD>R10k  </TD><TD> 225</TD><TD>100?</TD><TD> 289</TD><TD>0.29</TD></TR>
+<TR><TD>Origin </TD><TD>R10k  </TD><TD> 180</TD><TD>100?</TD><TD> 345</TD><TD>0.24</TD></TR>
+<TR><TD>O2     </TD><TD>R5000 </TD><TD> 180</TD><TD> 90?</TD><TD> 552</TD><TD>0.15</TD></TR>
+<TR><TD>Indy   </TD><TD>R5000 </TD><TD> 150</TD><TD> 75 </TD><TD> 657</TD><TD>0.13</TD></TR>
+<TR><TD>Indigo2</TD><TD>R4400 </TD><TD> 200</TD><TD> 75 </TD><TD> 676</TD><TD>0.12</TD></TR>
+<TR><TD>Indy   </TD><TD>R4600 </TD><TD> 100</TD><TD> 50 </TD><TD>1333</TD><TD>0.06</TD></TR>
+</TABLE>
+
+<P>
+<HR WIDTH="100%"></P>
+
+<H1><FONT COLOR="#004000"><FONT SIZE=+2>Speed of scala</FONT></FONT></H1>
+
+<P><FONT SIZE=+1>scaling <A HREF="scala_bmark.tgz">360 batches of data</A> in <A HREF="http://www.dl.ac.uk/CCP/CCP4/dist/html/scala.html">scala</A></FONT></P>
+
+<TABLE BORDER=1 >
+<TR ALIGN=CENTER VALIGN=CENTER>
+<TD>machine</TD>
+
+<TD>cpu</TD>
+<TD>clock<BR>(MHz)</TD>
+<TD>run time<BR>(s)</TD>
+<TD>relative<BR>speed</TD>
+</TR>
+
+<TR><TD>DEC    </TD><TD>alpha</TD><TD>833</TD><TD>680</TD><TD>3.00</TD></TR>
+<TR><TD>Linux  </TD><TD>Opteron</TD><TD>1400</TD><TD>788</TD><TD>2.59</TD></TR>
+<TR><TD>Linux  </TD><TD>Athlon</TD><TD>1800</TD><TD>1104</TD><TD>1.85</TD></TR>
+<TR><TD>Linux  </TD><TD>Athlon</TD><TD>1700</TD><TD>1184</TD><TD>1.73</TD></TR>
+<TR><TD>OSX    </TD><TD>G5    </TD><TD>1800</TD><TD>1328</TD><TD>1.54</TD></TR>
+<TR><TD>Linux  </TD><TD>Athlon</TD><TD>1300</TD><TD>1748</TD><TD>1.17</TD></TR>
+<TR><TD>Linux  </TD><TD>Athlon</TD><TD>1100</TD><TD>2010</TD><TD>1.02</TD></TR>
+<TR><TD>Linux  </TD><TD>PIII  </TD><TD>1000</TD><TD>2044</TD><TD>1.00</TD></TR>
+<TR><TD>OSX    </TD><TD>G4    </TD><TD> 800</TD><TD>2391</TD><TD>0.85</TD></TR>
+</TABLE>
+
+<P><FONT SIZE=+1>scaling 70 batches of data in <A HREF="http://www.dl.ac.uk/CCP/CCP4/dist/html/scala.html">scala</A></FONT></P>
+
+<TABLE BORDER=1 >
+<TR ALIGN=CENTER VALIGN=CENTER>
+<TD>machine</TD>
+
+<TD>cpu</TD>
+<TD>clock<BR>(MHz)</TD>
+<TD>run time<BR>(s)</TD>
+<TD>relative<BR>speed</TD>
+</TR>
+
+<TR><TD>DEC    </TD><TD>alpha</TD><TD>666</TD><TD> 36</TD><TD>1.50</TD></TR>
+<TR><TD>Linux  </TD><TD>PII  </TD><TD>450</TD><TD> 54</TD><TD>1.00</TD></TR>
+<TR><TD>DEC    </TD><TD>alpha</TD><TD>599</TD><TD> 55</TD><TD>0.98</TD></TR>
+<TR><TD>DEC    </TD><TD>alpha</TD><TD>666</TD><TD> 56</TD><TD>0.96</TD></TR>
+<TR><TD>Octane </TD><TD>R10k </TD><TD>250</TD><TD> 76</TD><TD>0.72</TD></TR>
+<TR><TD>Octane </TD><TD>R10k </TD><TD>225</TD><TD> 85</TD><TD>0.64</TD></TR>
+<TR><TD>Origin </TD><TD>R10k </TD><TD>180</TD><TD>100</TD><TD>0.54</TD></TR>
+<TR><TD>O2     </TD><TD>R5000</TD><TD>180</TD><TD>181</TD><TD>0.30</TD></TR>
+<TR><TD>Indy   </TD><TD>R5000</TD><TD>180</TD><TD>203</TD><TD>0.27</TD></TR>
+<TR><TD>Indigo2</TD><TD>R4400</TD><TD>150</TD><TD>214</TD><TD>0.25</TD></TR>
+<TR><TD>Indy   </TD><TD>R4600</TD><TD>100</TD><TD>crashed</TD><TD>?</TD></TR>
+</TABLE>
+
+<P>
+<HR WIDTH="100%"></P>
+
+<H1><FONT COLOR="#004000"><FONT SIZE=+2>Comments</FONT></FONT></H1>
+
+<P><FONT SIZE=+1>Overall, performance was quite consistent with multiple
+runs on all these machines (indicating disk cahce didn't make much difference).
+In the case of MOSFLM, running two jobs on a two-CPU computer had only a marginal (~3%) impact on the elapsed run time.
+Suprisingly, compiling with and without optimizations (where compilers
+were available) made no noticable difference for any of these programs.</FONT></P>
+
+<P>
+
+<H1>
+<HR WIDTH="100%"><FONT COLOR="#004000"><FONT SIZE=+2>Speed of O</FONT></FONT></H1>
+
+<P><FONT SIZE=+1>The following are the results of rotating this <A HREF="omark.tar">31,262-vector
+map</A> using the &quot;spin&quot; command in <A HREF="http://www.imsb.au.dk/~mok/o/">o</A>.
+I strongly encourage anyone out there with a PC running o (WinNT or Linux)
+to download my little map, and give it a whirl in o. I&nbsp;think all us
+crystallographers could really use a standard reference for the &quot;speed
+of o&quot; on linux systems, since it seems to be very difficult (for me
+at least) to predict how any particular system is going to perform.</FONT></P>
+
+<TABLE BORDER=1 >
+<TR ALIGN=CENTER VALIGN=CENTER>
+<TD>machine</TD>
+<TD>cpu</TD>
+<TD>clock<BR>(MHz)</TD>
+<TD>graphics<BR>card</TD>
+<TD>spin time<BR>(s)</TD>
+<TD>relative<BR>speed</TD>
+</TR>
+
+<TR>
+<TD><A href="http://www.penguincomputing.com/store/configurator.php?tid=NVMTAA">Linux</A></TD>
+
+<TD>Athlon     </TD><TD>1100   </TD><TD>GeForce 2 Ultra         </TD><TD>  1</TD><TD>44.0</TD></TR>
+<TR><TD>OSX    </TD><TD>G5    </TD><TD>2500</TD><TD>Radeon 9600 XT</TD><TD>  1</TD><TD>44.0</TD></TR>
+<TR><TD>Octane </TD><TD>R10k   </TD><TD>250</TD><TD>IMPACTSR    </TD><TD>  4</TD><TD>11.0</TD></TR>
+<TR><TD>Octane </TD><TD>R10k   </TD><TD>225</TD><TD>IMPACTSR    </TD><TD>  5</TD><TD>8.80</TD></TR>
+<TR><TD>Linux  </TD><TD>PII    </TD><TD>450</TD><TD><A HREF="nvidia_howto.html">Riva TNT2</A>
+                                                                </TD><TD>  6</TD><TD>7.33<TD></TR>
+<TR><TD>O2     </TD><TD>R5000  </TD><TD>180</TD><TD>CRM         </TD><TD> 10</TD><TD>4.40</TD></TR>
+<TR><TD>Indigo2</TD><TD>R4400  </TD><TD>200</TD><TD>GR2         </TD><TD> 15</TD><TD>2.93</TD></TR>
+<TR><TD>Indy   </TD><TD>R5000  </TD><TD>150</TD><TD>GR2         </TD><TD> 18</TD><TD>2.44</TD></TR>
+<TR><TD>Indigo </TD><TD>R4000  </TD><TD>100</TD><TD>GR2         </TD><TD> 18</TD><TD>2.44</TD></TR>
+<TR><TD>Linux  </TD><TD>PIII   </TD><TD>800</TD><TD>3D Rage Pro </TD><TD> 28</TD><TD>1.57</TD></TR>
+<TR><TD>WinNT  </TD><TD>PII    </TD><TD>600</TD><TD>Riva TNT2   </TD><TD> 41</TD><TD>1.07</TD></TR>
+<TR><TD>Linux  </TD><TD>PII    </TD><TD>450</TD><TD>S3 Trio64 V2</TD><TD> 44</TD><TD>1.00</TD></TR>
+<TR><TD>Win98  </TD><TD>PIII   </TD><TD>800</TD><TD>3D Rage Pro </TD><TD> 47</TD><TD>0.94</TD></TR>
+<TR><TD>Linux  </TD><TD>Celeron</TD><TD>500</TD><TD>Riva TNT2   </TD><TD> 50</TD><TD>0.88</TD></TR>
+<TR><TD>Indy   </TD><TD>R4600  </TD><TD>100</TD><TD>NG1         </TD><TD> 57</TD><TD>0.77</TD></TR>
+<TR><TD>WinNT  </TD><TD>PII    </TD><TD>333</TD><TD>3D Rage Pro </TD><TD> 75</TD><TD>0.59</TD></TR>
+<TR><TD>WinNT  </TD><TD>PII    </TD><TD>500</TD><TD>Matrox G400 </TD><TD>123</TD><TD>0.36</TD></TR>
+<TR><TD>Win95  </TD><TD>K6-2   </TD><TD>333</TD><TD>Matrox M220 </TD><TD>128</TD><TD>0.34</TD></TR>
+</TABLE>
+
+<P>
+<HR WIDTH="100%"></P>
+
+<P><A HREF="../elves/index.html"><IMG SRC="back.gif" BORDER=0 HEIGHT=40 WIDTH=40></A><A HREF="../elves/index.html">
+Back</A> to the Elves Homepage. 
+<HR>This page is not finished. It will never be finished, and neither will
+yours. Admit it.</P>
+
+<ADDRESS><A HREF="mailto:jholton@uclink4.berkeley.edu">James Holton &lt;jholton@uclink4.berkeley.edu&gt;</A></ADDRESS>
+
+</BODY>
+</HTML>
